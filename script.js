@@ -27,35 +27,57 @@ const typedValueElement = document.getElementById('typed-value');
 
 // at the end of script.js 
 document.getElementById('start').addEventListener('click', () => {
-    //get a quote 
+    //get a quote
+    const quoteIndex = Math.floor(Math.random() ** quotes.length);
+    const quote = quotes[quoteIndex]; 
 
-
-    // Put the quote in an array of words 
+    // Put the quote in an array of words
+    words = quote.split(''); 
 
     // reset the word index for tracking 
+    wordIndex = 0; 
 
     // UI updates 
     // Create an array of span elements so we can set a class 
+    const spanWords = words.map(function(word) { return `<span>${word} </span>`});
 
     // Convert into string and set as innerHTML on quote display 
+    quoteElement.innerHTML = spanWords.join('');
 
     // Hihlight the first word
+    quoteElement.childNodes[0].className = 'highlight';
 
     // Clear and prior messages
+    messageElement.innerText = '';
 
     // Setup the textbox
     // Clear the textbox 
+    typedValueElement.value = '';
 
     //set focus
+    typedValueElement.focus();
 
     //set the event handler 
 
-    // Start the  timer 
+    // Start the  timer
+    startTime = new Date().getTime(); 
 });
 
 // at the end of the script.js 
 typedValueElement.addEventListener('input', () =>{
     // Get the current word 
+    const currentWord = words[wordIndex];
+
+    // get the currebt value 
+    const typedValue = typedValueElement. value;
+
+    if (typedValue === currentWord && wordIndex === words.length-1){
+        // end of sentence 
+        // Display success
+        const elapsedTime = new Date().getTime() - startTime;
+        const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
+        messageElement.innerText = message;
+    } else if ( )
     
 
     //get the current value 
